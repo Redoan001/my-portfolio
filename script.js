@@ -47,9 +47,47 @@ function typeLoop() {
 
 window.addEventListener("load", typeLoop);
 
+// --- Scroll Reveal (Hero first, then sections on scroll) ---
 
-// Start typing after page load
-window.addEventListener("load", typeWriter);
+(function initScrollReveal() {
+    const hero = document.querySelector(".hero");
+    // HERO: slide from left on entry
+    if (hero) {
+        hero.classList.add("reveal", "from-left");
+        requestAnimationFrame(() => hero.classList.add("in-view"));
+    }
+
+    // Auto-pick reveal blocks in page order (includes portfolio reliably)
+    const revealTargets = Array.from(
+        document.querySelectorAll(".logo-banner, section, footer")
+        ).filter((el) => !el.classList.contains("hero"));
+
+    // Alternate directions: right, left, right, left...
+    revealTargets.forEach((el, i) => {
+        el.classList.add("reveal", i % 2 === 0 ? "from-right" : "from-left");
+    });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("in-view");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+    {
+        threshold: 0.12,
+        rootMargin: "0px 0px -15% 0px",
+    }
+  );
+
+  // Start observing after layout is stable (helps heavy iframe sections like portfolio)
+  window.addEventListener("load", () => {
+    revealTargets.forEach((el) => observer.observe(el));
+  });
+})();
+
 
 
 // Form Handling Script

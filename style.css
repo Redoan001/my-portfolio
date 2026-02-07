@@ -34,6 +34,33 @@ body {
     100% { transform: translateX(-50%); }
 }
 
+/* --- Scroll Reveal (slide + fade) --- */
+.js .reveal {
+    opacity: 0;
+    transform: translateX(0);
+    transition: transform 0.9s ease, opacity 0.9s ease;
+    will-change: transform, opacity;
+}
+
+.js .reveal.from-left { transform: translateX(-70px); }
+.js .reveal.from-right { transform: translateX(70px); }
+
+.js .reveal.in-view {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal,
+    .js .reveal.in-view {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+
 /* --- LOGO STYLING --- */
 .logo a { display: block; line-height: 0; }
 .logo img { height: 60px; width: auto; display: block; transition: filter 0.3s ease; }
