@@ -262,72 +262,7 @@
 
     <a href="#home" id="backToTop">↑</a>
 
-    
-    <!-- JavaScript Section -->
-
-    <script>
-        
-        // Set dynamic year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Form Handling Script
-        const form = document.getElementById("my-form");
-        const successMessage = document.getElementById("success-message");
-
-        async function handleSubmit(event) {
-            event.preventDefault();
-            const status = document.getElementById("submit-btn");
-            const data = new FormData(event.target);
-        
-            status.innerHTML = "Sending...";
-            status.disabled = true;
-
-            fetch(event.target.action, {
-                method: form.method,
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    // Hide the form and show the success message
-                    form.style.display = "none";
-                    successMessage.style.display = "block";
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            alert(data["errors"].map(error => error["message"]).join(", "));
-                        } else {
-                            alert("Oops! There was a problem submitting your form");
-                        }
-                    })
-                }
-            }).catch(error => {
-                alert("Oops! There was a problem submitting your form");
-            }).finally(() => {
-                status.innerHTML = "Submit";
-                status.disabled = false;
-            });
-        }
-        form.addEventListener("submit", handleSubmit);
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) { backToTop.classList.add('show'); } 
-            else { backToTop.classList.remove('show'); }
-        });
-
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('toggle');
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('toggle');
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>

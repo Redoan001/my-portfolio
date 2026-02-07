@@ -12,7 +12,7 @@ html { scroll-behavior: smooth; }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
 body {
-    background: url('Background.jpg') no-repeat center center fixed;
+    background: transparent
     background-size: cover;
     color: var(--text-white);
     overflow-x: hidden;
