@@ -64,6 +64,22 @@ nav {
 
 .btn-hire:hover { transform: scale(1.05); filter: brightness(1.2); box-shadow: 0 0 15px rgba(255, 76, 49, 0.4); }
 
+/* Typewriter cursor */
+#typewriter {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#typewriter::after{
+    content: " |";
+    animation: tw-blink 0.9s steps(1) infinite;
+}
+
+@keyframes tw-blink{
+  50% { opacity: 0; }
+}
+
+
 /* --- SECTIONS --- */
 .hero { display: flex; align-items: center; justify-content: space-between; padding: 150px 10% 60px; min-height: 90vh; }
 .hero-content { max-width: 500px; }
@@ -85,7 +101,7 @@ nav {
     background: var(--glass); border: 1px solid var(--glass-border); padding: 30px;
     border-radius: 30px; backdrop-filter: blur(10px); margin: 0 auto; text-align: justify;
 }
-
+.accent { color: var(--accent);}
 .expert-areas { padding: 60px 5%; }
 .section-header { text-align: center; margin-bottom: 60px; }
 .section-header h2 { font-size: 3rem; font-weight: 800; }
