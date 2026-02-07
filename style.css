@@ -2,8 +2,7 @@
 html { scroll-behavior: smooth; }
 
 :root {
-    --accent: #ff4c31; 
-    --glass: rgba(255, 255, 255, 0.05);
+    --accent: #ff4c31;
     --glass-border: rgba(255, 255, 255, 0.4);
     --text-white: #ffffff;
     --text-gray: #a9a9b3;
@@ -116,7 +115,7 @@ nav {
 .hero-image img { width: 400px; border-radius: 20px; z-index: 2; }
 
 .logo-banner {
-    width: 100%; padding: 15px 0; background: var(--glass); 
+    width: 100%; padding: 15px 0; background: transparent; 
     backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.1);
     border-bottom: 1px solid rgba(255,255,255,0.1); overflow: hidden; position: relative;
 }
@@ -125,7 +124,7 @@ nav {
 
 .about-me { padding: 60px 10%; }
 .about-content {
-    background: var(--glass); border: 1px solid var(--glass-border); padding: 30px;
+    background: transparent; border: 1px solid var(--text-white); padding: 30px;
     border-radius: 30px; backdrop-filter: blur(10px); margin: 0 auto; text-align: justify;
 }
 .accent { color: var(--accent);}
@@ -136,7 +135,7 @@ nav {
 
 .expert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 2%; }
 .expert-card {
-    background: var(--glass); border: 1px solid var(--glass-border); padding: 40px 20px;
+    background: transparent; border: 1px solid whitesmoke; padding: 40px 20px;
     border-radius: 30px; text-align: center; backdrop-filter: blur(10px);
     transition: 0.4s ease; display: flex; flex-direction: column; align-items: center;
 }
@@ -167,7 +166,7 @@ nav {
 
 #backToTop {
     position: fixed; bottom: 40px; right: 40px; width: 50px; height: 50px;
-    background: var(--glass); border: 2px solid var(--accent); color: white;
+    background: transparent; border: 2px solid var(--accent); color: white;
     border-radius: 50%; display: flex; justify-content: center; align-items: center;
     text-decoration: none; font-size: 24px; z-index: 2000; opacity: 0;
     visibility: hidden; transition: 0.3s; backdrop-filter: blur(10px);
@@ -177,7 +176,7 @@ nav {
 /* --- EXPLORE MORE SECTION --- */
 .explore-more { padding: 10px 10% 60px; text-align: center; }
 .explore-btns { display: flex; justify-content: center; gap: 25px; }
-.explore-btn { background: var(--glass); border: 1px solid var(--glass-border); color: var(--text-white); padding: 14px 45px;
+.explore-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-white); padding: 14px 45px;
                 border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.4s ease; backdrop-filter: blur(10px); }
 .explore-btn:hover { background: var(--accent); border-color: var(--accent); color: white; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 76, 49, 0.3); }
 
@@ -195,7 +194,7 @@ nav {
 .social-links a img { margin-left: -12px; height: 30px; margin-top: 5px;}
 .social-links a:hover img { filter: invert(43%) sepia(78%) saturate(3683%) hue-rotate(344deg) brightness(100%) contrast(101%); }
 
-.contact-form-container { background: var(--glass); border: 1px solid var(--glass-border); padding: 40px; border-radius: 30px; backdrop-filter: blur(10px); }
+.contact-form-container { background: transparent; border: 1px solid var(--glass-border); padding: 40px; border-radius: 30px; backdrop-filter: blur(10px); }
 .contact-form-container h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-white); }
@@ -210,8 +209,7 @@ nav {
 }
 
 /* --- FOOTER --- */
-footer { text-align: center; padding: 20px 10%; color: var(--text-gray);border-top: 1px solid var(--glass-border); background: rgba(13, 6, 23, 0.9); font-size: 0.99rem;
-}
+footer { text-align: center; padding: 20px 10%; color: var(--text-gray);border-top: 1px solid var(--glass-border); background: transparent}
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 900px) {
