@@ -172,6 +172,15 @@ nav {
     visibility: hidden; transition: 0.3s; backdrop-filter: blur(10px);
 }
 #backToTop.show { opacity: 1; visibility: visible; }
+/* ===== Back To Top: Mobile Fix ===== */
+.is-mobile #backToTop {
+  bottom: 20px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  border-width: 1.5px;
+}
 
 /* --- EXPLORE MORE SECTION --- */
 .explore-more { padding: 10px 10% 60px; text-align: center; }
@@ -230,4 +239,70 @@ footer { text-align: center; padding: 20px 10%; color: var(--text-gray);border-t
 @media (max-width: 768px) {
     .explore-btns { flex-direction: column; align-items: center; gap: 15px; }
     .explore-btn { width: 100%; max-width: 300px; }
+}
+
+/* ===== Portfolio Carousel (mobile) ===== */
+.is-mobile .grid-reels,
+.is-mobile .grid-ads,
+.is-mobile .grid-promo {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 10px 6px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.is-mobile .grid-reels::-webkit-scrollbar,
+.is-mobile .grid-ads::-webkit-scrollbar,
+.is-mobile .grid-promo::-webkit-scrollbar {
+  height: 6px;
+}
+
+.is-mobile .portfolio-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* Responsive slide sizes (avoid fixed px widths on mobile) */
+.is-mobile .tall   { width: 82vw; aspect-ratio: 9 / 16; height: auto; }
+.is-mobile .square { width: 82vw; aspect-ratio: 1 / 1;  height: auto; }
+.is-mobile .wide   { width: 92vw; aspect-ratio: 16 / 9; height: auto; }
+
+/* ===== Carousel Controls injected by JS ===== */
+.carousel-wrap {
+  position: relative;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: rgba(13, 6, 23, 0.65);
+  backdrop-filter: blur(10px);
+  color: var(--text-white);
+  cursor: pointer;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  opacity: 0.95;
+}
+
+.carousel-btn:hover {
+  border-color: var(--accent);
+}
+
+.carousel-btn.prev { left: -6px; }
+.carousel-btn.next { right: -6px; }
+
+/* Only show buttons on mobile (still swipeable) */
+.is-desktop .carousel-btn,
+.is-tablet .carousel-btn {
+  display: none;
 }

@@ -170,3 +170,89 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
+// --- JS Responsive Breakpoints
+(function responsiveClasses() {
+  const body = document.body;
+
+  function apply() {
+    const w = window.innerWidth;
+    body.classList.remove("is-mobile", "is-tablet", "is-desktop");
+    if (w < 768) body.classList.add("is-mobile");
+    else if (w < 1024) body.classList.add("is-tablet");
+    else body.classList.add("is-desktop");
+  }
+
+  let t;
+  window.addEventListener("resize", () => {
+    clearTimeout(t);
+    t = setTimeout(apply, 120);
+  });
+
+  window.addEventListener("load", apply);
+  apply();
+})();
+
+// --- Portfolio Carousel (mobile): inject prev/next buttons and scroll by one "card"
+(function initPortfolioCarousel() {
+  const carousels = document.querySelectorAll(".grid-reels, .grid-ads, .grid-promo");
+  if (!carousels.length) return;
+
+  function wrapWithControls(track) {
+    // Prevent double init
+    if (track.closest(".carousel-wrap")) return;
+
+    const wrap = document.createElement("div");
+    wrap.className = "carousel-wrap";
+
+    // Insert wrap before track and move track inside
+    track.parentNode.insertBefore(wrap, track);
+    wrap.appendChild(track);
+
+    const prev = document.createElement("button");
+    prev.className = "carousel-btn prev";
+    prev.type = "button";
+    prev.setAttribute("aria-label", "Previous");
+    prev.textContent = "‹";
+
+    const next = document.createElement("button");
+    next.className = "carousel-btn next";
+    next.type = "button";
+    next.setAttribute("aria-label", "Next");
+    next.textContent = "›";
+
+    wrap.appendChild(prev);
+    wrap.appendChild(next);
+
+    const scrollByOne = (dir) => {
+      // Find a reasonable step: first visible item width + gap
+      const firstItem = track.querySelector(".portfolio-item");
+      if (!firstItem) return;
+
+      const itemRect = firstItem.getBoundingClientRect();
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+
+      const step = itemRect.width + gap;
+      track.scrollBy({ left: dir * step, behavior: "smooth" });
+    };
+
+    prev.addEventListener("click", () => scrollByOne(-1));
+    next.addEventListener("click", () => scrollByOne(1));
+  }
+
+  function applyCarouselMode() {
+    const isMobile = document.body.classList.contains("is-mobile");
+
+    carousels.forEach((track) => {
+      if (isMobile) {
+        wrapWithControls(track);
+      }
+      // On tablet/desktop we keep your existing grid layout.
+      // (Controls auto-hidden via CSS)
+    });
+  }
+
+  window.addEventListener("load", applyCarouselMode);
+  window.addEventListener("resize", applyCarouselMode);
+  applyCarouselMode();
+})();
