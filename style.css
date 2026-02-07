@@ -12,7 +12,7 @@ html { scroll-behavior: smooth; }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
 body {
-    background: transparent
+
     background-size: cover;
     color: var(--text-white);
     overflow-x: hidden;
@@ -34,7 +34,7 @@ body {
     100% { transform: translateX(-50%); }
 }
 
-/* --- Scroll Reveal (slide + fade) --- */
+/* --- Scroll Reveal --- */
 .js .reveal {
     opacity: 0;
     transform: translateX(0);
@@ -144,9 +144,9 @@ nav {
 .expert-card img { width: 80px; height: 80px; margin-bottom: 20px; object-fit: contain; }
 
 /* --- PORTFOLIO --- */
-.portfolio { padding: 60px 30px; }
-.portfolio-category { margin-bottom: 60px; }
-.portfolio-category h3 { font-size: 1.8rem; margin: 20px 0 20px; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+.portfolio { padding: 60px 5% 10px; }
+.portfolio-category { margin-bottom: 40px; }
+.portfolio-category h3 { color: whitesmoke; font-size: 1.8rem; margin: 40px 0 20px; text-align: center; font-weight: 600; letter-spacing: 2px; }
 
 .grid-reels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .grid-ads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -159,11 +159,11 @@ nav {
 }
 
 .portfolio-item iframe { width: 100%; height: 100%; border: none; border-radius: 20px; }
-.portfolio-item:hover { transform: translateY(-10px); border-color: var(--accent); }
+.portfolio-item:hover { border-color: var(--accent); }
 
-.tall { height: 663px; width: 372px; }
-.square { height: 420px; width: 420px; }
-.wide { height: 365px; width: 650px; }
+.tall { height: 480px; width: 100%; }
+.square { aspect-ratio: 1/1; width: 100%; }
+.wide { height: 260px; width: 100%; }
 
 #backToTop {
     position: fixed; bottom: 40px; right: 40px; width: 50px; height: 50px;
@@ -209,7 +209,7 @@ nav {
     font-weight: 600; border-radius: 50px; cursor: pointer; transition: 0.3s; width: 100%;
 }
 
-/* --- FOOTER (NEW) --- */
+/* --- FOOTER --- */
 footer { text-align: center; padding: 20px 10%; color: var(--text-gray);border-top: 1px solid var(--glass-border); background: rgba(13, 6, 23, 0.9); font-size: 0.99rem;
 }
 

@@ -1,7 +1,18 @@
-// Set dynamic year
+// -- Set dynamic year
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
-// Typewriter Effect for Name
+// Hover effect for portfolio items
+document.querySelectorAll("[data-hover]").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        el.style.transform = "translateY(-20px)";
+    });
+    el.addEventListener("mouseleave", () => {
+        el.style.transform = "translateY(0)";
+    });
+});
+
+
+// -- Typewriter Effect for Name
 const typewriterElement = document.getElementById("typewriter");
 const typewriterText = "MD. REDOAN";
 
@@ -59,7 +70,7 @@ window.addEventListener("load", typeLoop);
 
     // Auto-pick reveal blocks in page order (includes portfolio reliably)
     const revealTargets = Array.from(
-        document.querySelectorAll(".logo-banner, section, footer")
+        document.querySelectorAll(".logo-banner, section")
         ).filter((el) => !el.classList.contains("hero"));
 
     // Alternate directions: right, left, right, left...
@@ -158,3 +169,4 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         hamburger.classList.remove('toggle');
     });
 });
+
