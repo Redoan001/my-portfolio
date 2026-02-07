@@ -234,11 +234,6 @@
             <div class="contact-form-container">
                 <h3>Provide me with the details</h3>
                 <form id="my-form" action="https://formspree.io/f/mwvvldny" method="POST">
-                    <div id="success-message" style="display:none; text-align:center; padding: 20px;">
-                        <p style="color: var(--accent); font-weight: 800; font-size: 1.2rem;">
-                            Thanks! I have received your query.
-                        </p>
-                    </div>
                     <div class="form-group">
                         <label for="name">Name*</label>
                         <input type="text" id="name" name="name" placeholder="Your Full Name" required>
@@ -257,6 +252,11 @@
                     </div>
                     <button type="submit" class="btn-submit">Submit</button>
                 </form>
+                <div id="success-message" style="display:none; text-align:center; padding: 20px;">
+                        <p style="color: var(--accent); font-weight: 800; font-size: 1.2rem;">
+                            Thanks! I have received your query and will get back to you as soon as possible. Looking forward to connecting with you!
+                        </p>
+                    </div>
             </div>
         </div>
     </section>
