@@ -16,7 +16,7 @@ body {
     color: var(--text-white);
     overflow-x: hidden;
     line-height: 1.6;
-    background-color: #0d0617;
+    background-color: black;
 }
 
 /* --- ANIMATIONS --- */
