@@ -192,7 +192,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   apply();
 })();
 
-// --- Portfolio Carousel (mobile): inject prev/next buttons and scroll by one "card"
+// --- Portfolio Carousel (mobile) ---
 (function initPortfolioCarousel() {
   const carousels = document.querySelectorAll(".grid-reels, .grid-ads, .grid-promo");
   if (!carousels.length) return;
