@@ -21,7 +21,7 @@ let isDeleting = false;
 
 const typeSpeed = 400;      // typing speed
 const deleteSpeed = 200;     // deleting speed
-const pauseAfterType = 800; // pause when fully typed
+const pauseAfterType = 2000; // pause when fully typed
 const pauseAfterDelete = 400; // pause when fully deleted
 
 function typeLoop() {
