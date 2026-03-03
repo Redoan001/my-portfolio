@@ -337,3 +337,129 @@ clickEffectStyle.textContent = `
   }
 `;
 document.head.appendChild(clickEffectStyle);
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ALL BUTTONS - Enhanced hover effects with glow
+// ═══════════════════════════════════════════════════════════════════════════
+
+function animateButtonsGlow() {
+  if (typeof gsap === 'undefined') return;
+
+  document.querySelectorAll('.btn-hire, .btn-submit').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      gsap.timeline()
+        .to(btn, {
+          duration: 0.3,
+          scale: 1.08,
+          ease: 'back.out(1.5)'
+        }, 0)
+        .to(btn, {
+          duration: 0.3,
+          boxShadow: '0 0 30px rgba(255, 76, 49, 0.8), 0 0 60px rgba(255, 76, 49, 0.4)',
+          filter: 'brightness(1.15)',
+          ease: 'power2.out'
+        }, 0)
+        .to(btn, {
+          duration: 0.3,
+          textShadow: '0 0 15px rgba(255, 76, 49, 0.8)',
+          ease: 'power2.out'
+        }, 0);
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      gsap.timeline()
+        .to(btn, {
+          duration: 0.25,
+          scale: 1,
+          ease: 'power2.out'
+        }, 0)
+        .to(btn, {
+          duration: 0.25,
+          boxShadow: '0 0 0px rgba(255, 76, 49, 0)',
+          filter: 'brightness(1)',
+          ease: 'power2.out'
+        }, 0)
+        .to(btn, {
+          duration: 0.25,
+          textShadow: '0 0 0px rgba(255, 76, 49, 0)',
+          ease: 'power2.out'
+        }, 0);
+    });
+  });
+}
+animateButtonsGlow();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FORM INPUTS - Glow effect on focus
+// ═══════════════════════════════════════════════════════════════════════════
+
+function animateFormInputsGlow() {
+  if (typeof gsap === 'undefined') return;
+
+  document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
+    input.addEventListener('focus', () => {
+      gsap.timeline()
+        .to(input, {
+          duration: 0.3,
+          borderColor: 'rgba(255, 76, 49, 1)',
+          boxShadow: '0 0 20px rgba(255, 76, 49, 0.6), inset 0 0 15px rgba(255, 76, 49, 0.1)',
+          ease: 'power2.out'
+        }, 0)
+        .to(input, {
+          duration: 0.3,
+          background: 'rgba(255, 76, 49, 0.02)',
+          ease: 'power2.out'
+        }, 0);
+    });
+
+    input.addEventListener('blur', () => {
+      gsap.timeline()
+        .to(input, {
+          duration: 0.25,
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          boxShadow: '0 0 0px rgba(255, 76, 49, 0)',
+          ease: 'power2.out'
+        }, 0)
+        .to(input, {
+          duration: 0.25,
+          background: 'rgba(255, 255, 255, 0.03)',
+          ease: 'power2.out'
+        }, 0);
+    });
+  });
+}
+animateFormInputsGlow();
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// EXPERT CARD HOVERS - Lift up with shadow on hover
+// ═══════════════════════════════════════════════════════════════════════════
+
+function animateExpertCardHovers() {
+  if (typeof gsap === 'undefined') return;
+
+  document.querySelectorAll('.expert-card').forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      gsap.timeline()
+        .to(card, {
+          duration: 0.3,
+          y: -10,
+          boxShadow: '0 20px 50px rgba(255, 76, 49, 0.5)',
+          borderColor: 'rgba(255, 76, 49, 0.8)',
+          ease: 'power2.out'
+        }, 0);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.timeline()
+        .to(card, {
+          duration: 0.3,
+          y: 0,
+          boxShadow: 'none',
+          borderColor: 'whitesmoke',
+          ease: 'power2.out'
+        }, 0);
+    });
+  });
+}
+animateExpertCardHovers();
