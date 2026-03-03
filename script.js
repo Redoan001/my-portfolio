@@ -259,8 +259,8 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 // CLICK RIPPLE + PARTICLE BURST ─────────────────────────────────────
 // On every click, two effects fire simultaneously from the click point:
-//   1. A ripple ring expands outward and fades — like a water drop
-//   2. 20 small particles explode outward in random directions and shrink away
+//    A ripple ring expands outward and fades — like a water drop
+//    20 small particles explode outward in random directions and shrink away
 
 document.addEventListener('click', e => {
   const x = e.clientX;
