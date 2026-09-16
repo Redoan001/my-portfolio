@@ -8,12 +8,12 @@ the original portfolio.
 ## Features
 
 - Responsive navigation with a keyboard-accessible mobile menu
-- Animated hero typewriter, waving emoji, and scrolling client banner
+- Animated hero name reveal, waving emoji, and scrolling client banner
 - About and service sections with the original content and artwork
 - Sixteen YouTube projects grouped into Reels, Social Media Ads, and
   Promotional Video
 - Swipeable mobile portfolio carousels with Lucide navigation controls
-- GSAP-powered button, service-card, and form-field interactions
+- GSAP-powered button and form-field interactions with pointer-responsive service cards
 - Staged scroll reveals, back-to-top control, and document click particles
 - Web3Forms contact form with validation, submission feedback, timeout handling,
   duplicate-request prevention, and retry-safe errors
@@ -118,7 +118,7 @@ Web3Forms account configuration.
 │   ├── assets/                    Original portfolio and social image assets
 │   ├── components/
 │   │   ├── Navigation.tsx         Desktop and mobile navigation
-│   │   ├── Hero.tsx               Hero content and typewriter lifecycle
+│   │   ├── Hero.tsx               Hero content and name-reveal sequence
 │   │   ├── Portfolio.tsx          Video categories and mobile carousels
 │   │   ├── Contact.tsx            Contact details and social links
 │   │   ├── ContactForm.tsx        Web3Forms request and feedback states
@@ -169,7 +169,7 @@ Playwright runs 20 regression tests in installed Google Chrome. The suite covers
 
 - typography, colors, desktop grids, content, and all video URLs;
 - mobile navigation, carousel controls, and boundary widths;
-- typewriter timing, scroll reveals, click effects, hover/focus effects, and
+- hero name reveal, scroll reveals, click effects, hover/focus effects, and
   back-to-top behavior;
 - native form validation, Web3Forms payloads, duplicate protection, success,
   service and network failures, retries, timeout handling, and missing-key

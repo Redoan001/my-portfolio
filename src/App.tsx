@@ -38,7 +38,15 @@ export function App() {
         <div className="section-header"><h2>My Expert <span>Areas</span></h2></div>
         <div className="expert-grid">
           {services.map(({ image, title, description }) => (
-            <div className="expert-card" key={title}>
+            <div
+              className="expert-card"
+              key={title}
+              onPointerMove={(event) => {
+                const bounds = event.currentTarget.getBoundingClientRect()
+                event.currentTarget.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`)
+                event.currentTarget.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`)
+              }}
+            >
               <img src={image} alt={title} />
               <h4>{title}</h4><p>{description}</p>
             </div>

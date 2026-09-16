@@ -1,49 +1,24 @@
-import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 import portrait from '../assets/redoan.png'
 
 const name = 'MD. REDOAN'
 
-function Typewriter() {
-  const [text, setText] = useState('')
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>
-    let charIndex = 0
-    let isDeleting = false
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
-
-    function tick() {
-      charIndex += isDeleting ? -1 : 1
-      setText(name.slice(0, charIndex))
-      let delay = isDeleting ? 200 : 400
-      if (charIndex === name.length) {
-        isDeleting = true
-        delay = 2000
-      } else if (charIndex === 0) {
-        isDeleting = false
-        delay = 500
-      }
-      timeout = setTimeout(tick, delay)
-    }
-
-    function start() {
-      clearTimeout(timeout)
-      if (preference.matches) setText(name)
-      else {
-        charIndex = 0
-        isDeleting = false
-        tick()
-      }
-    }
-    start()
-    preference.addEventListener('change', start)
-    return () => {
-      clearTimeout(timeout)
-      preference.removeEventListener('change', start)
-    }
-  }, [])
-
-  return <span id="typewriter" className="accent" aria-label={name}><span aria-hidden="true">{text}</span></span>
+function NameReveal() {
+  return (
+    <span id="name-reveal" className="accent" aria-label={name}>
+      <span aria-hidden="true">
+        {Array.from(name).map((character, index) => (
+          <span
+            className="name-reveal-letter"
+            style={{ '--letter-delay': `${180 + index * 48}ms` } as CSSProperties}
+            key={`${character}-${index}`}
+          >
+            {character === ' ' ? '\u00A0' : character}
+          </span>
+        ))}
+      </span>
+    </span>
+  )
 }
 
 export function Hero() {
@@ -51,7 +26,7 @@ export function Hero() {
     <header className="hero" id="home">
       <div className="hero-content max-w-[500px]">
         <h1>HELLO I'M <span className="wave-emoji">👋</span></h1>
-        <h1><Typewriter /></h1>
+        <h1><NameReveal /></h1>
         <p className="mb-[30px] text-muted">Professional Video Editor and Motion Graphic Designer with a focus on high-impact results-driven visual content.</p>
         <button type="button" className="btn-hire" onClick={() => { window.location.hash = 'portfolio' }}>View Portfolio</button>
       </div>

@@ -1,4 +1,4 @@
-import { Globe, Mail, MapPin, Phone } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import facebook from '../assets/facebook-icon.png'
 import instagram from '../assets/instagram-icon.png'
 import twitter from '../assets/twitter-icon.png'
@@ -10,7 +10,6 @@ const details = [
   { Icon: MapPin, title: 'Address', value: 'Dhaka, Bangladesh' },
   { Icon: Mail, title: 'Email', value: 'md40redoan47@gmail.com' },
   { Icon: Phone, title: 'Phone Number', value: '01969502140' },
-  { Icon: Globe, title: 'Website', value: 'https://redoan001.github.io/my-portfolio/' },
 ] as const
 
 // Brand logos stay as the original artwork; Lucide supplies the interface icons.

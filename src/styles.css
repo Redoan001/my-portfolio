@@ -60,8 +60,16 @@
   .btn-hire { @apply cursor-pointer rounded-[50px] border-0 bg-accent px-[25px] py-[10px] font-semibold text-white; transition: 0.3s ease; }
   .btn-hire:hover { transform: scale(1.05); filter: brightness(1.2); box-shadow: 0 0 15px rgba(255, 76, 49, 0.4); }
 
-  #typewriter { @apply inline-block whitespace-nowrap; }
-  #typewriter::after { content: ' |'; animation: tw-blink 0.9s steps(1) infinite; }
+  #name-reveal { @apply inline-block whitespace-nowrap; perspective: 700px; }
+  .name-reveal-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translate3d(0, 0.38em, 0) rotateX(-16deg);
+    transform-origin: 50% 100%;
+    filter: blur(4px);
+    backface-visibility: hidden;
+    animation: name-letter-reveal 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--letter-delay) forwards;
+  }
   .hero { @apply flex min-h-[90vh] items-center justify-between px-[10%] pt-[150px] pb-[60px]; }
   .hero-content h1 { @apply mb-[20px] text-[4.5rem] leading-[1.1] font-extrabold; }
   .hero-image img { @apply relative z-[2] w-[400px] rounded-[20px]; }
@@ -73,9 +81,41 @@
   .section-header h2 { @apply text-[3rem] font-extrabold; }
   .section-header span { @apply text-accent; }
   .expert-grid { @apply grid grid-cols-4 gap-[20px] px-[2%]; }
-  .expert-card { @apply flex flex-col items-center rounded-[30px] border border-solid border-[#f5f5f5] bg-transparent px-[20px] py-[40px] text-center backdrop-blur-[10px]; transition: 0.4s ease; }
-  .expert-card:hover { @apply border-accent bg-accent/5; transform: translateY(-10px); }
-  .expert-card img { @apply mb-[20px] h-[80px] w-[80px] object-contain; }
+  .expert-card {
+    --pointer-x: 50%;
+    --pointer-y: 50%;
+    @apply relative isolate flex flex-col items-center overflow-hidden rounded-[30px] border border-solid border-[#f5f5f5] bg-transparent px-[20px] py-[40px] text-center backdrop-blur-[10px];
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0);
+    transition:
+      transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 280ms ease,
+      background-color 280ms ease,
+      box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .expert-card::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0 -z-10 opacity-0;
+    background: radial-gradient(circle 180px at var(--pointer-x) var(--pointer-y), rgba(255, 76, 49, 0.14), transparent 72%);
+    transition: opacity 280ms ease;
+  }
+  .expert-card:hover {
+    border-color: rgba(255, 76, 49, 0.72);
+    background-color: rgba(255, 76, 49, 0.025);
+    transform: translate3d(0, -6px, 0);
+    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.38), 0 10px 30px rgba(255, 76, 49, 0.12);
+  }
+  .expert-card:hover::before { opacity: 1; }
+  .expert-card img {
+    @apply mb-[20px] h-[80px] w-[80px] object-contain;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: brightness(1);
+    transition:
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 280ms ease;
+  }
+  .expert-card:hover img { transform: translate3d(0, -3px, 0) scale(1.045); filter: brightness(1.08); }
+  .expert-card h4 { transition: color 220ms ease; }
+  .expert-card:hover h4 { color: var(--accent); }
 
   .portfolio-category h3 { @apply mt-[40px] mb-[20px] text-center text-[1.8rem] font-semibold tracking-[2px] text-[#f5f5f5]; }
   .grid-reels, .grid-ads { @apply grid grid-cols-3 gap-[20px]; }
@@ -150,7 +190,11 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-@keyframes tw-blink { 50% { opacity: 0; } }
+@keyframes name-letter-reveal {
+  0% { opacity: 0; transform: translate3d(0, 0.38em, 0) rotateX(-16deg); filter: blur(4px); }
+  55% { opacity: 1; }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); filter: blur(0); }
+}
 @keyframes rippleExpand { to { width: 120px; height: 120px; opacity: 0; } }
 @keyframes particleFly {
   to { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))); opacity: 0; width: 0; height: 0; }
@@ -158,6 +202,8 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal, .reveal.in-view { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; transition: none !important; }
-  .wave-emoji, .banner-track, #typewriter::after { animation: none; }
+  .wave-emoji, .banner-track, .name-reveal-letter { animation: none; }
+  .name-reveal-letter { opacity: 1; transform: none; filter: none; }
+  .expert-card:hover, .expert-card:hover img { transform: none; }
   *, *::before, *::after { transition-duration: 0s !important; }
 }

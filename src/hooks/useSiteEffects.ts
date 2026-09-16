@@ -241,31 +241,6 @@ export function useSiteEffects(rootRef: RefObject<HTMLDivElement | null>) {
         });
       });
 
-      root.querySelectorAll<HTMLElement>('.expert-card').forEach((card) => {
-        listen(card, 'mouseenter', () => {
-          animate(card, () => {
-            gsap.to(card, {
-              duration: 0.3,
-              y: -10,
-              boxShadow: '0 20px 50px rgba(255, 76, 49, 0.5)',
-              borderColor: 'rgba(255, 76, 49, 0.8)',
-              ease: 'power2.out',
-            });
-          });
-        });
-        listen(card, 'mouseleave', () => {
-          animate(card, () => {
-            gsap.to(card, {
-              duration: 0.3,
-              y: 0,
-              boxShadow: 'none',
-              borderColor: 'whitesmoke',
-              ease: 'power2.out',
-            });
-          });
-        });
-      });
-
       return () => {
         cleanups.forEach((cleanup) => cleanup());
         context.revert();

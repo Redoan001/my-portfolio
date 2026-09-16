@@ -69,7 +69,9 @@ test('retains the original videos, typography, colors, and desktop grids', async
   await expect(page.locator('.hero-content h1').first()).toHaveCSS('font-size', '72px')
   await expect(page.locator('.hero-content h1').first()).toHaveCSS('font-weight', '800')
   await expect(page.locator('.hero-content p')).toHaveCSS('color', 'rgb(169, 169, 179)')
-  await expect(page.locator('#typewriter')).toHaveCSS('color', 'rgb(255, 76, 49)')
+  await expect(page.locator('#name-reveal')).toHaveCSS('color', 'rgb(255, 76, 49)')
+  await expect(page.locator('.name-reveal-letter').first()).toHaveCSS('animation-name', 'none')
+  await expect(page.locator('.name-reveal-letter').first()).toHaveCSS('opacity', '1')
   await expect(page.locator('.nav-links a').first()).toHaveCSS('font-size', '17.6px')
   await expect(page.locator('.section-header h2').first()).toHaveCSS('font-size', '48px')
   await expect(page.locator('.btn-submit')).toHaveCSS('background-color', 'rgb(255, 76, 49)')
@@ -136,22 +138,20 @@ test('resizing across original breakpoints switches navigation and carousel layo
   }
 })
 
-test('typewriter types the name, deletes it, and repeats', async ({ page }) => {
-  test.setTimeout(45_000)
+test('hero name reveals once and remains fully readable', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
-  await page.clock.install({ time: new Date('2026-01-01T00:00:00Z') })
-  await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'))
   await page.goto('/')
-  const samples: string[] = []
-  for (let step = 0; step < 65; step += 1) {
-    await page.clock.runFor(200)
-    samples.push(await page.locator('#typewriter').innerText())
-  }
-  const firstFullName = samples.indexOf('MD. REDOAN')
-  expect(firstFullName).toBeGreaterThanOrEqual(0)
-  const clearedAfterName = samples.findIndex((text, index) => index > firstFullName && text === '')
-  expect(clearedAfterName).toBeGreaterThan(firstFullName)
-  expect(samples.slice(clearedAfterName + 1)).toContain('MD. REDOAN')
+  const nameReveal = page.locator('#name-reveal')
+  const letters = page.locator('.name-reveal-letter')
+  await expect(nameReveal).toHaveText('MD. REDOAN')
+  await expect(letters).toHaveCount(10)
+  await expect(letters.first()).toHaveCSS('animation-name', 'name-letter-reveal')
+  await expect.poll(() => letters.evaluateAll((elements) =>
+    elements.every((element) => getComputedStyle(element).opacity === '1'),
+  )).toBe(true)
+  const settledText = await nameReveal.innerText()
+  await page.waitForTimeout(1_200)
+  await expect(nameReveal).toHaveText(settledText)
 })
 
 test('back-to-top appears beyond 400px and returns to the hero', async ({ page }) => {
@@ -239,7 +239,7 @@ test('normal-motion clicks create a ring and twenty particles that clean up', as
   await expect(page.locator('.click-ripple, .click-particle')).toHaveCount(0)
 })
 
-test('normal-motion hover and focus preserve button glow, card lift, and input glow', async ({ page }) => {
+test('normal-motion hover and focus preserve button glow, expert-card depth, and input glow', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/')
   await page.evaluate(() => document.fonts.ready)
@@ -262,8 +262,13 @@ test('normal-motion hover and focus preserve button glow, card lift, and input g
   await card.hover()
   await expect.poll(() => card.evaluate((element) =>
     new DOMMatrixReadOnly(getComputedStyle(element).transform).f,
-  )).toBeLessThan(-9)
+  )).toBeLessThan(-5)
   await expect(card).toHaveCSS('box-shadow', /255, 76, 49/)
+  await expect(card.locator('img')).toHaveCSS('filter', 'brightness(1.08)')
+  await expect(card.locator('h4')).toHaveCSS('color', 'rgb(255, 76, 49)')
+  await expect.poll(() => card.evaluate((element) =>
+    getComputedStyle(element, '::before').opacity,
+  )).toBe('1')
   await page.mouse.move(0, 0)
   await expect.poll(() => card.evaluate((element) =>
     new DOMMatrixReadOnly(getComputedStyle(element).transform).f,
