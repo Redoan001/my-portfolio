@@ -205,22 +205,22 @@ for (const viewport of [
   { width: 390, height: 600 },
   { width: 768, height: 600 },
 ]) {
-  test(`normal-motion scroll reveals every section at ${viewport.width}px`, async ({ page }) => {
+  test(`normal-motion scroll reveals every staged group at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport)
     await page.emulateMedia({ reducedMotion: 'no-preference' })
     await page.goto('/')
     await page.evaluate(() => document.fonts.ready)
-    await expect(page.locator('#portfolio')).toHaveCSS('opacity', '0')
-    const sections = page.locator('.hero, .logo-banner, section')
-    for (const section of await sections.all()) {
-      await section.evaluate((element) => {
-        const heading = element.querySelector('.section-header, .contact-info h2') ?? element
-        window.scrollTo({ top: window.scrollY + heading.getBoundingClientRect().top - 150, behavior: 'instant' })
+    const firstPortfolioGroup = page.locator('#portfolio .carousel-wrap').first()
+    await expect(firstPortfolioGroup).toHaveCSS('opacity', '0')
+    const revealTargets = page.locator('.reveal')
+    for (const target of await revealTargets.all()) {
+      await target.evaluate((element) => {
+        window.scrollTo({ top: window.scrollY + element.getBoundingClientRect().top - 150, behavior: 'instant' })
       })
-      await expect(section).toHaveCSS('opacity', '1')
+      await expect(target).toHaveCSS('opacity', '1')
     }
-    // The stacked portfolio at 768px is much taller than the viewport but must reveal.
-    await expect(page.locator('#portfolio')).toHaveCSS('opacity', '1')
+    // Each portfolio group reveals at its own scroll position, including the tall 768px layout.
+    await expect(firstPortfolioGroup).toHaveCSS('opacity', '1')
   })
 }
 

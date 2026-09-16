@@ -14,7 +14,7 @@ the original portfolio.
   Promotional Video
 - Swipeable mobile portfolio carousels with Lucide navigation controls
 - GSAP-powered button, service-card, and form-field interactions
-- Alternating scroll reveals, back-to-top control, and document click particles
+- Staged scroll reveals, back-to-top control, and document click particles
 - Web3Forms contact form with validation, submission feedback, timeout handling,
   duplicate-request prevention, and retry-safe errors
 - Reduced-motion support and accessible labels, iframe titles, and live regions
